@@ -1,39 +1,25 @@
 const express = require('express')
+const randomMapService = require('./randomMapService')
 const app = express()
-const port = 3000
-
-const names = [
-    'lea',
-    'bat',
-    'clo',
-    'marco'
-]
-
-const getMap = (names) => {
-    let randomNames = [...names].sort( () => .5 - Math.random() );
-
-    let result = names.map((name, index) => ({
-        [name]: randomNames[index]
-    }))
-
-    while (result.find((item, index) => Object.keys(item)[0] === Object.values(item)[0])) {
-        randomNames = [...names].sort( () => .5 - Math.random() );
-        result = names.map((name, index) => ({
-            [name]: randomNames[index]
-        }))
-    }
-
-    return result
-}
+const port = 3300
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+app.get('/get-url', (req, res) => {
+    const randomMap = randomMapService.map
+    const urls = randomMap.map((item) => `${Object.keys(item)[0]} : http://localhost:3300/${Object.values(item)[0].id}`)
+
+    res.send(JSON.stringify(urls))
+})
+
 app.get('/:id', (req, res) => {
-    const maaap = getMap(names)
-    const result = maaap.find(item => Object.keys(item)[0] === req.params.id);
-    res.send(`Vous devez faire un cadeeau à ${Object.values(result)[0]}`)
+    const userId = req.params.id
+    const randomMap = randomMapService.map
+    const result = randomMap.find(item => Object.values(item)[0].id === userId);
+
+    res.send(`Vous devez faire un cadeeau à ${Object.values(result)[0].name}`)
 })
 
 app.listen(port, () => {
