@@ -1,7 +1,7 @@
 const express = require('express')
 const randomMapService = require('./randomMapService')
 const app = express()
-const port = 3300
+const port = process.env.PORT || 3300
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views/pages'));
