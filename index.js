@@ -13,7 +13,8 @@ app.get('/', (req, res) => {
 
 app.get('/get-url', (req, res) => {
     const randomMap = randomMapService.map
-    const urls = randomMap.map((item) => `${Object.keys(item)[0]} : http://localhost:3300/${Object.values(item)[0].id}`)
+    const currentURL = req.protocol + '://' + req.get('host')
+    const urls = randomMap.map((item) => `${Object.keys(item)[0]} : ${currentURL}/${Object.values(item)[0].id}`)
 
     res.render('pages/urls', {urls: urls});
 })
