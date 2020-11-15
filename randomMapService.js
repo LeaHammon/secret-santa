@@ -1,10 +1,16 @@
 const { v4: uuidv4 } = require('uuid');
 
 const names = [
-    {name: 'lea', id: uuidv4()},
-    {name: 'bat', id: uuidv4()},
+    {name: 'léa', id: uuidv4()},
+    {name: 'baptiste', id: uuidv4()},
+    {name: 'antoine', id: uuidv4()},
     {name: 'clo', id: uuidv4()},
     {name: 'marco', id: uuidv4()},
+    {name: 'céline', id: uuidv4()},
+    {name: 'timothé', id: uuidv4()},
+    {name: 'justine', id: uuidv4()},
+    {name: 'puppy', id: uuidv4()},
+    {name: 'tita', id: uuidv4()},
 ]
 
 const getMap = (names) => {
