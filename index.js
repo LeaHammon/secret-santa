@@ -4,7 +4,8 @@ const app = express()
 const port = process.env.PORT || 3300
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/views/pages'));
+app.use(express.static(__dirname + '/views/pages/urls'));
+app.use(express.static(__dirname + '/views/pages/results'));
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -14,8 +15,6 @@ app.get('/get-url', (req, res) => {
     const randomMap = randomMapService.map
     const urls = randomMap.map((item) => `${Object.keys(item)[0]} : http://localhost:3300/${Object.values(item)[0].id}`)
 
-    // console.log(JSON.parse(urls))
-    // res.send(JSON.stringify(urls))
     res.render('pages/urls', {urls: urls});
 })
 
@@ -24,7 +23,7 @@ app.get('/:id', (req, res) => {
     const randomMap = randomMapService.map
     const result = randomMap.find(item => Object.values(item)[0].id === userId);
 
-    res.render('pages/results', {name: Object.values(result)[0].name});
+    res.render('pages/results', {name: result ? Object.values(result)[0].name : ''});
 })
 
 app.listen(port, () => {
