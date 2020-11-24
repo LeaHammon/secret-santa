@@ -11,6 +11,7 @@ const names = [
     {name: 'justine', id: uuidv4()},
     {name: 'puppy', id: uuidv4()},
     {name: 'tita', id: uuidv4()},
+    {name: 'yulia', id: uuidv4()},
 ]
 
 const getMap = (names) => {
